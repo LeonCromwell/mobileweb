@@ -29,6 +29,11 @@
       integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
       crossorigin="anonymous"
     ></script>
+    <style>
+      .card-img-top {
+        max-height: 150px;
+      }
+    </style>
     <title>Spax</title>
   </head>
   <body>
@@ -39,9 +44,7 @@
           <button><i class="fa-solid fa-magnifying-glass"></i></button>
         </div>
       </header>
-      <div class="content">
-        
-      </div>
+      <div class="row"></div>
     </div>
     <script type="module">
       // Import the functions you need from the SDKs you need
@@ -74,17 +77,55 @@
 
       const db = getDatabase(app);
       const dbRef = ref(db);
+      let data = [];
 
       const getData = async () => {
-        const snapshot = await get(child(dbRef, `NhaHang/nh001`));
+        const snapshot = await get(child(dbRef, `nhaHang/`));
         if (snapshot.exists()) {
           console.log(snapshot.val());
+          data = Object.values(snapshot.val());
         } else {
           console.log("No data available");
         }
       };
 
-      getData();
+      // getData();
+
+      const content = document.querySelector(".row");
+      const updateUi = async () => {
+        await getData();
+        console.log(data);
+        data.forEach((item, index) => {
+          content.innerHTML += `<div class="card ml-4" style="width: 18rem">
+            <img src="${item.anhNhaHang}" class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title">${item.tenNhaHang}</h5>
+              <p class="card-text">
+                ${item.diaChiNhaHang}
+              </p>
+              <div id="rating${index}"></div>
+              
+            </div>
+          </div>`;
+          let star = Object.values(item.danhGia);
+          let average = star.reduce((a, b) => a + b, 0) / star.length;
+
+          $(function () {
+            $("#rating" + index).rateYo({
+              rating: average,
+              fullStar: true,
+              readOnly: true,
+              onSet: function (rating, rateYoInstance) {
+                // Your logic to handle the rating, for example, send it to the server
+                console.log("You rated " + rating + " stars.");
+              },
+            });
+          });
+        });
+      };
+
+      updateUi();
+      
     </script>
   </body>
 </html>
