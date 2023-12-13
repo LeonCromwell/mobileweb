@@ -30,24 +30,128 @@
       crossorigin="anonymous"
     ></script>
     <style>
+      header {
+        display: flex;
+        justify-content: center;
+      }
       .card-img-top {
         max-height: 150px;
+      }
+      .wrapper {
+        width: 500px;
+      }
+      .search {
+        width: 500px;
+        height: 46px;
+        padding-left: 16px;
+        display: flex;
+        background-color: rgba(22, 24, 35, 0.06);
+        border-radius: 92px;
+        position: relative;
+        border: 1.5px solid transparent;
+        transition: width 0.5s ease-in-out;
+
+        input {
+          flex: 1;
+          height: 100%;
+          padding-right: 35px;
+          color: var(--black);
+          /* font-family: var(--font-family); */
+          font-size: 1rem;
+          border: none;
+          /* caret-color: var(--primary); */
+          background-color: transparent;
+          outline: none;
+        }
+
+        input:not(:placeholder-shown) ~ .search-btn {
+          color: rgba(22, 24, 35, 0.75);
+        }
+
+        &::after {
+          content: "";
+          position: absolute;
+          width: 1px;
+          height: 35px;
+          right: 52px;
+          top: 5.5px;
+          background-color: rgba(22, 24, 35, 0.12);
+        }
+
+        &:focus-within {
+          width: 120%;
+          border: 1.5px solid rgba(22, 24, 35, 0.34);
+        }
+      }
+
+      .clear-btn,
+      .spinner {
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: rgba(22, 24, 35, 0.34);
+        border: none;
+      }
+
+      .spinner {
+        font-size: 1rem;
+        animation: loading 1s linear infinite;
+      }
+
+      @keyframes loading {
+        to {
+          transform: translateY(-50%) rotate(360deg);
+        }
+      }
+      .search-btn {
+        position: absolute;
+        right: 0;
+        width: 52px;
+        height: 100%;
+        border: none;
+        outline: none;
+        border-top-right-radius: 50%;
+        border-bottom-right-radius: 50%;
+        font-size: 1.6rem;
+        color: rgba(22, 24, 35, 0.34);
+
+        &:hover {
+          background-color: rgba(22, 24, 35, 0.03);
+          cursor: pointer;
+        }
+
+        &:active {
+          background-color: rgba(22, 24, 35, 0.06);
+        }
+      }
+
+      .search-label {
+        h4 {
+          font-size: 14px;
+          font-weight: 600;
+          color: rgba(22, 24, 35, 0.5);
+          padding: 5px 12px;
+        }
       }
     </style>
     <title>Spax</title>
   </head>
   <body>
-    <div class="container">
-      <header>
+    <header class="mt-3">
+      <div class="wrapper">
         <div class="search">
-          <input type="text" />
-          <button><i class="fa-solid fa-magnifying-glass"></i></button>
+          <input placeholder="Bạn đang tìm kiếm gì?" spellcheck="false" />
+          <button class="search-btn">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
         </div>
-      </header>
+      </div>
+    </header>
+    <div class="container">
       <div class="row"></div>
     </div>
 
-    <!-- modal -->
     <!-- Modal -->
     <div
       class="modal fade"
@@ -129,23 +233,30 @@
       // getData();
 
       const content = document.querySelector(".row");
+      let detail = {};
+
       const updateUi = async () => {
         await getData();
+
         data.forEach((item, index) => {
+          console.log(item);
           content.innerHTML += `
-          <div class="card ml-4" style="width: 18rem; padding-top: 12px;">
-            <button type="button" style="border:none;background: transparent;"  data-bs-toggle="modal" data-bs-target="#exampleModal">
-            <img src="${item.anhNhaHang}" class="card-img-top" alt="..." />
-            <div class="card-body">
-              <h5 class="card-title">${item.tenNhaHang}</h5>
-              <p class="card-text">
-                ${item.diaChiNhaHang}
-              </p>
-              <div id="rating${index}"></div>
+              <div class='col-sm-6 col-lg-3 mt-4'>
+              <div class="card ml-4" style="width: 18rem; min-height: 350px; padding-top: 12px;">
+                <button type="button" onclick="console.log(${item})"  style="border:none;background: transparent;"  data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <img src="${item.anhNhaHang}" class="card-img-top" alt="..." />
+                <div class="card-body">
+                  <h5 class="card-title">${item.tenNhaHang}</h5>
+                  <p class="card-text">
+                    ${item.diaChiNhaHang}
+                  </p>
+                  <div id="rating${index}"></div>
+                  </div>
+                  </button>
               </div>
-              </button>
-          </div>
-          `;
+              </div>
+              `;
+
           let star = Object.values(item.danhGia);
           let average = star.reduce((a, b) => a + b, 0) / star.length;
 
