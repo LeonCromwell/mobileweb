@@ -3,6 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/772918bb67.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
 
     <!--========== BOX ICONS ==========-->
     <link
@@ -12,6 +22,27 @@
 
     <!--========== CSS ==========-->
     <link rel="stylesheet" href="assets/css/styles.css" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+      integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <style>
+      .footer__content ul {
+        padding: 0;
+      }
+    </style>
 
     <title>Responsive website food</title>
   </head>
@@ -29,9 +60,7 @@
         <div class="nav__menu" id="nav-menu">
           <ul class="nav__list">
             <li class="nav__item">
-              <a href="restaurant.html?idnh=1" class="nav__link active-link"
-                >Home</a
-              >
+              <a href="#home" class="nav__link active-link">Home</a>
             </li>
             <li class="nav__item">
               <a href="#about" class="nav__link">About</a>
@@ -61,15 +90,12 @@
       <section class="home" id="home">
         <div class="home__container bd-container bd-grid">
           <div class="home__data">
-            <h1 class="home__title">Tasty food</h1>
-            <h2 class="home__subtitle">
-              Try the best food of <br />
-              the week.
-            </h2>
-            <a href="#" class="button">View Menu</a>
+            <h1 class="home__title"></h1>
+            <h2 class="home__subtitle"></h2>
+            <a href="#menu" class="button">View Menu</a>
           </div>
 
-          <img src="assets/img/home.png" alt="" class="home__img" />
+          <img alt="" class="home__img" />
         </div>
       </section>
 
@@ -77,19 +103,17 @@
       <section class="about section bd-container" id="about">
         <div class="about__container bd-grid">
           <div class="about__data">
-            <span class="section-subtitle about__initial">About us</span>
-            <h2 class="section-title about__initial">
-              We cook the best <br />
-              tasty food
-            </h2>
-            <p class="about__description">
-              We cook the best food in the entire city, with excellent customer
-              service, the best meals and at the best price, visit us.
-            </p>
-            <a href="#" class="button">Explore history</a>
+            <span class="section-subtitle about__initial">About</span>
+            <h2 class="section-title about__initial"></h2>
+            <p class="about__description"></p>
           </div>
-
-          <img src="assets/img/about.jpg" alt="" class="about__img" />
+          <div
+            id="carouselExampleSlidesOnly"
+            class="carousel slide about__img"
+            data-bs-ride="carousel"
+          >
+            <div class="carousel-inner"></div>
+          </div>
         </div>
       </section>
 
@@ -461,23 +485,31 @@
       <section class="app section bd-container">
         <div class="app__container bd-grid">
           <div class="app__data">
-            <span class="section-subtitle app__initial">App</span>
-            <h2 class="section-title app__initial">App is aviable</h2>
-            <p class="app__description">
-              Find our application and download it, you can make reservations,
-              food orders, see your deliveries on the way and much more.
-            </p>
-            <div class="app__stores">
-              <a href="#"
-                ><img src="assets/img/app1.png" alt="" class="app__store"
-              /></a>
-              <a href="#"
-                ><img src="assets/img/app2.png" alt="" class="app__store"
-              /></a>
+            <span class="section-subtitle app__initial">Đánh giá của bạn</span>
+            <div class="mt-3 mb-3" id="userrating"></div>
+            <div class="mb-3">
+              <label for="exampleFormControlTextarea1" class="form-label"
+                >Đánh giá</label
+              >
+              <textarea
+                class="form-control"
+                id="exampleFormControlTextarea1"
+                rows="3"
+              ></textarea>
+              <button type="button" class="btn btn-success mt-3" id="btnRating">
+                Đánh giá
+              </button>
             </div>
           </div>
-
-          <img src="assets/img/movil-app.png" alt="" class="app__img" />
+          <div class="app__data">
+            <div class="app__img">
+              <span id="averageRating">0</span>
+              <div id="rating"></div>
+            </div>
+            <div id="comment">
+              <div class="list-group"></div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -541,12 +573,7 @@
 
         <div class="footer__content">
           <h3 class="footer__title">Adress</h3>
-          <ul>
-            <li>Lima - Peru</li>
-            <li>Jr Union #999</li>
-            <li>999 - 888 - 777</li>
-            <li>tastyfood@email.com</li>
-          </ul>
+          <ul id="footer_contact"></ul>
         </div>
       </div>
 
@@ -567,6 +594,8 @@
         ref,
         get,
         child,
+        set,
+        push,
       } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js";
 
       // Your web app's Firebase configuration
@@ -602,6 +631,137 @@
         }
       };
       getData();
+
+      const menu = document.querySelector(".menu__container");
+      const home__title = document.querySelector(".home__title");
+      const home__img = document.querySelector(".home__img");
+      const about__description = document.querySelector(".about__description");
+      const carousel_inner = document.querySelector(".carousel-inner");
+      const footer_contact = document.querySelector("#footer_contact");
+      const comment = document.querySelector(".list-group");
+      const btnRating = document.querySelector("#btnRating");
+      let detail = {};
+      const urlsParams = new URLSearchParams(window.location.search);
+
+      function updateAverageRating(average) {
+        // Update the text of the span element
+        $("#averageRating").text(average.toFixed(1));
+      }
+
+      function handleSendData() {
+        const idnh = urlsParams.get("idnh");
+        const comment = document.querySelector(
+          "#exampleFormControlTextarea1"
+        ).value;
+        const rating = $("#userrating").rateYo("rating");
+        console.log(rating);
+        const dbRef = ref(db, `nhaHang/${data[idnh].id}/danhGia`);
+        const newPostRef = push(dbRef);
+        set(newPostRef, rating);
+        const dbRef2 = ref(db, `nhaHang/${data[idnh].id}/binhLuan`);
+        const newPostRef2 = push(dbRef2);
+        set(newPostRef2, comment);
+        alert("Đánh giá thành công");
+        window.location.reload();
+      }
+
+      btnRating.addEventListener("click", handleSendData);
+
+      const updateUi = async () => {
+        await getData();
+        const id = urlsParams.get("idnh");
+        let star = Object.values(data[id].danhGia);
+        let average = star.reduce((a, b) => a + b, 0) / star.length;
+        const initRating = () => {
+          $(function () {
+            $("#rating").rateYo({
+              rating: average,
+              fullStar: true,
+              readOnly: true,
+              onSet: function (rating, rateYoInstance) {
+                // Update the average rating value
+                average = (average + rating) / 2;
+                // Update the text of the span element
+                updateAverageRating(average);
+                // Log the rating to the console
+                console.log(
+                  "You rated " +
+                    rating +
+                    " stars. Average rating: " +
+                    average.toFixed(1)
+                );
+              },
+            });
+          });
+          updateAverageRating(average);
+        };
+
+        window.onload = initRating();
+
+        $(function () {
+          $("#userrating").rateYo({
+            rating: 0,
+            fullStar: true,
+            // readOnly: true,
+            onSet: function (rating, rateYoInstance) {
+              // Update the average rating value
+              average = (average + rating) / 2;
+              // Update the text of the span element
+              updateAverageRating(average);
+              // Log the rating to the console
+              console.log("You rated " + rating + " stars");
+            },
+          });
+        });
+        home__title.innerHTML = data[id].tenNhaHang;
+        home__img.src = data[id].anhNhaHang;
+        about__description.innerHTML = data[id].moTaNhaHang;
+        footer_contact.innerHTML = `
+          <li>
+            <a href="#" class="footer__link"><i class="bx bx-location-plus"></i>  ${data[id].diaChiNhaHang}</a>
+           </li>
+          <li>
+            <a href="#" class="footer__link"><i class="bx bx-envelope"></i>  ${data[id].email}</a>
+            </li>
+          <li>
+            <a href="#" class="footer__link"> <i class="bx bx-phone-call"></i>  ${data[id].soDienThoai}
+           </li>
+        `;
+        Object.entries(data[id].binhLuan).forEach(([key, value]) => {
+          comment.innerHTML += `
+          <a href="#" class="list-group-item list-group-item-action">${value}</a>
+          `;
+        });
+        Object.entries(data[id].cacAnhNhaHang).forEach(([key, value]) => {
+          if (key == "anh1") {
+            carousel_inner.innerHTML += `
+            <div class="carousel-item active">
+                <img  src="${value}" class="d-block w-100 about__img" alt="..." />
+            </div>`;
+          } else {
+            carousel_inner.innerHTML += `
+            <div class="carousel-item">
+                <img src="${value}" class="d-block w-100 about__img" alt="..." />
+            </div>
+        `;
+          }
+        });
+        Object.entries(data[id].thucDon).forEach(([key, value]) => {
+          menu.innerHTML += `
+            <div class="menu__content">
+                <img src="${value.hinhAnhMinhHoa}" alt="" class="menu__img" />
+                <h3 class="menu__name">${value.tenMonAn}</h3>
+                <span class="menu__detail">${value.moTaMonAn}</span>
+                <span class="menu__preci">${value.giaMonAn.toLocaleString()} đ</span>
+                <a href="#" class="button menu__button"
+                ><i class="bx bx-cart-alt"></i
+                ></a>
+            </div>
+        `;
+        });
+      };
+
+      updateUi();
     </script>
     <script src="assets/js/main.js"></script>
   </body>
