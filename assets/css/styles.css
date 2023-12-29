@@ -111,9 +111,9 @@ img{
 }
 
 /*========== CLASS CSS ==========*/
-/* .section{
-  padding: 4rem 0 2rem;
-} */
+.section{
+  padding: 0rem 0 2rem;
+}
 
 .section-title, .section-subtitle{
   text-align: center;
