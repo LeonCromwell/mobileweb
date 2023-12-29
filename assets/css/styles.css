@@ -68,6 +68,9 @@ body.dark-theme{
   --text-color: #C7D1CC;
   --body-color: #1D2521;
   --container-color: #27302C;
+  background-color: #1D2521;
+  color: #C7D1CC;
+
 }
 
 /*========== Button Dark/Light ==========*/
@@ -108,9 +111,9 @@ img{
 }
 
 /*========== CLASS CSS ==========*/
-.section{
+/* .section{
   padding: 4rem 0 2rem;
-}
+} */
 
 .section-title, .section-subtitle{
   text-align: center;
