@@ -357,7 +357,8 @@
         about__description.innerHTML = data[id].moTaNhaHang;
         contact__description.innerHTML = `
           <li>
-            <a href="#" class="footer__link"><i class="bx bx-location-plus"></i>  ${data[id].diaChiNhaHang}</a>
+            <a href="map.html?diaChi= +${data[id].diaChiNhaHang}"  class="footer__link">
+              <i class="bx bx-location-plus"></i>  ${data[id].diaChiNhaHang}</a>
            </li>
           <li>
             <a href="#" class="footer__link"><i class="bx bx-envelope"></i>  ${data[id].email}</a>
