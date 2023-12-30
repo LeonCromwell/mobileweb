@@ -31,7 +31,7 @@ function scrollActive() {
 
   sections.forEach((current) => {
     const sectionHeight = current.offsetHeight;
-    const sectionTop = current.offsetTop - 100;
+    const sectionTop = current.offsetTop - 50;
     sectionId = current.getAttribute("id");
 
     if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
@@ -111,11 +111,11 @@ const sr = ScrollReveal({
 
 sr.reveal(
   `.home__data, .home__img,
-            .about__data, .about__img,
-            .services__content, .menu__content,
-            .app__data, .app__img,
-            .contact__data, .contact__button,
-            .footer__content`,
+          .about__data, .about__img,
+          .services__content, .menu__content,
+          .app__data, .app__img,
+          .contact__data, .contact__button,
+          .footer__content`,
   {
     interval: 200,
   }
