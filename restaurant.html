@@ -295,6 +295,9 @@
           "#exampleFormControlTextarea1"
         ).value;
         const rating = $("#userrating").rateYo("rating");
+       if(comment == ""){
+         alert("Vui lòng nhập bình luận");
+        }else{
         console.log(rating);
         const dbRef = ref(db, `nhaHang/${data[idnh].id}/danhGia`);
         const newPostRef = push(dbRef);
@@ -304,28 +307,10 @@
         set(newPostRef2, comment);
         alert("Đánh giá thành công");
         window.location.reload();
+         }
       }
       btnRating.addEventListener("click", handleSendData);
 
-      // map
-      function getmap(address) {
-        const geocodeUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
-          address
-        )}`;
-        fetch(geocodeUrl)
-          .then((response) => response.json())
-          .then((data) => {
-            if (data.length > 0) {
-              const latitude = parseFloat(data[0].lat);
-              const longitude = parseFloat(data[0].lon);
-              const location = { lat: latitude, lng: longitude };
-              window.location = `https://www.google.com/maps?q=${location.lat},${location.lng}&z=17&hl=vi`;
-            } else {
-              console.error("Không tìm thấy địa chỉ.");
-            }
-          })
-          .catch((error) => console.error("Lỗi khi gọi API Nominatim:", error));
-      }
 
     
       // update UI
@@ -368,10 +353,6 @@
             onSet: function (rating, rateYoInstance) {
               // Update the average rating value
               average = (average + rating) / 2;
-              // Update the text of the span element
-              updateAverageRating(average);
-              // Log the rating to the console
-              console.log("You rated " + rating + " stars");
             },
           });
         });
