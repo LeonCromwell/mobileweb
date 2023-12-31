@@ -376,8 +376,8 @@
           <a href="#" class="list-group-item list-group-item-action">${value}</a>
           `;
         });
-        Object.entries(data[id].cacAnhNhaHang).forEach(([key, value]) => {
-          if (key == "anh1") {
+        Object.values(data[id].cacAnhNhaHang).forEach((value, index) => {
+          if (index == 0) {
             carousel_inner.innerHTML += `
             <div class="carousel-item active">
                 <img  src="${value}" class="d-block w-100 about__img" alt="..." />
